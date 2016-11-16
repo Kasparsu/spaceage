@@ -15,6 +15,7 @@ class CreatePlanetsTable extends Migration
     {
         Schema::create('planets', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('star_system_id')->unsigned();
             $table->foreign('star_system_id')->references('id')->on('star_systems')->onDelete('cascade');
             $table->timestamps();
             $table->string('name');

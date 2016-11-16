@@ -15,7 +15,8 @@ class CreatePlotsTable extends Migration
     {
         Schema::create('plots', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('splanet_id')->references('id')->on('planets')->onDelete('cascade');
+            $table->integer('planet_id')->unsigned();
+            $table->foreign('planet_id')->references('id')->on('planets')->onDelete('cascade');
             $table->string('name');
             $table->integer('type');
             $table->integer('position');

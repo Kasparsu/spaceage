@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\StarSystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 class GalaxyController extends Controller
@@ -13,54 +14,15 @@ class GalaxyController extends Controller
      */
     public function index()
     {
-        Redis::pipeline(function ($pipe) {
-            for ($i = 0; $i < 1000; $i++) {
-                $pipe->set("key:$i", $i);
-            }
-        });
         return view('map');
 
     }
     public function data()
     {
-        $points = $this->GenerateGalaxy(1000, 2, 1, 0.15, 1.2);
+        $points = StarSystem::all();
         echo(json_encode($points));
     }
-    public function GenerateGalaxy($numOfStars, $numOfArms, $spin, $armSpread, $starsAtCenterRatio) {
-        $result = [];
-        for ($i = 0; $i < $numOfArms; $i++) {
-            $result = array_merge($result, $this->GenerateArm($numOfStars / $numOfArms, $i / $numOfArms, $spin, $armSpread, $starsAtCenterRatio));
-        }
-        return $result;
-    }
 
-    public function GenerateArm($numOfStars, $rotation, $spin, $armSpread, $starsAtCenterRatio) {
-        $result = [];
-        for ($i = 0; $i < $numOfStars; $i++)
-        {
-            $part = (double)$i / (double)$numOfStars;
-            $part = pow($part, $starsAtCenterRatio);
-
-            $distanceFromCenter = (float)$part;
-            $position = ($part * $spin + $rotation) * M_PI * 2;
-
-            $xFluctuation = ($this->Pow3Constrained(mt_rand(0,999)/1000) - $this->Pow3Constrained(mt_rand(0,999)/1000)) * $armSpread;
-            $yFluctuation = ($this->Pow3Constrained(mt_rand(0,999)/1000) - $this->Pow3Constrained(mt_rand(0,999)/1000)) * $armSpread;
-
-            $resultX = cos($position) * $distanceFromCenter / 2 + 0.5 + $xFluctuation;
-            $resultY = sin($position) * $distanceFromCenter / 2 + 0.5 + $yFluctuation;
-
-            $result[$i] = [$resultX, $resultY];
-        }
-
-        return $result;
-    }
-
-    public function Pow3Constrained($x)
-    {
-        $value = pow($x - 0.5, 3) * 4 + 0.5;
-        return max(min(1, $value), 0);
-    }
     /**
      * Show the form for creating a new resource.
      *

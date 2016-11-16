@@ -14,8 +14,8 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     var stage = new createjs.Stage("myCanvas");
-    var stage2 = new createjs.Stage("myCanvas");
     var obj = [];
+    var lines = [];
     //img.src = 'http://www.pngall.com/wp-content/uploads/2016/07/Sun-PNG-HD.png';
     $.ajax({
         url: "data",
@@ -29,25 +29,33 @@
         console.log("hi");
         var i = 0;
         obj.forEach(function(el){
-                addCircle(1, el[0] * 1000, el[1] * 1000);
+                addCircle(1, el['X'], el['Y']);
         });
         addgrid();
         stage.update();
     }
-    function addgrid(){
+    function removegrid(){
 
-        for(var i = 0; i<canvas.width; i=i+(canvas.width/20)) {
-
-            console.log(i);
-            var line = new createjs.Shape();
-            line.graphics.setStrokeStyle(1);
-            line.graphics.beginStroke("#ff0000");
-            line.graphics.moveTo(i, 0);
-            line.graphics.lineTo(i, canvas.height);
-            line.graphics.endStroke();
-            stage2.addChild(line);
+        for(var i = 0; i<lines.length; i++) {
+            stage.removeChild(lines[i]);
         }
-        stage2.update();
+        lines = [];
+        stage.update();
+    }
+    function addgrid(){
+        for(var i = -stage.x; i<-stage.x + canvas.width; i=i+(canvas.width)/20) {
+
+
+            var line = new createjs.Shape();
+            line.graphics.setStrokeStyle(1/stage.scaleX);
+            line.graphics.beginStroke("#ff0000");
+            line.graphics.moveTo(i/stage.scaleX+stage.regX, (-stage.y)/stage.scaleX+ stage.regY);
+            line.graphics.lineTo(i/stage.scaleX+stage.regX, (-stage.y + canvas.height)/stage.scaleX+stage.regY);
+            line.graphics.endStroke();
+            lines.push(line);
+            stage.addChild(line);
+        }
+        stage.update();
     }
     function addCircle(r,x,y){
         var g=new createjs.Graphics().beginFill("#ff0000").drawCircle(0,0,r);
@@ -64,16 +72,19 @@
     function MouseWheelHandler(e) {
         e.preventDefault();
         if(Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)))>0)
-            zoom=1.1;
+            zoom=2;
         else
-            zoom=1/1.1;
+            zoom=0.5;
 
         var local = stage.globalToLocal(stage.mouseX, stage.mouseY);
         stage.regX=local.x;
         stage.regY=local.y;
+        console.log(stage.regX);
         stage.x=stage.mouseX;
         stage.y=stage.mouseY;
         stage.scaleX=stage.scaleY*=zoom;
+        removegrid();
+        addgrid();
 
 
         stage.update();
@@ -85,6 +96,8 @@
         stage.addEventListener("stagemousemove",function(ev) {
             stage.x = ev.stageX+offset.x;
             stage.y = ev.stageY+offset.y;
+            console.log(stage.x + ":" + stage.y);
+            removegrid();
             addgrid();
             stage.update();
         });

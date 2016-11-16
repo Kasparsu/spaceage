@@ -15,11 +15,12 @@ class CreateStarSystemsTable extends Migration
     {
         Schema::create('star_systems', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('galaxy_id')->unsigned();
             $table->foreign('galaxy_id')->references('id')->on('galaxies')->onDelete('cascade');
             $table->string('name');
             $table->integer('type');
-            $table->integer('X');
-            $table->integer('Y');
+            $table->float('X');
+            $table->float('Y');
             $table->timestamps();
         });
     }

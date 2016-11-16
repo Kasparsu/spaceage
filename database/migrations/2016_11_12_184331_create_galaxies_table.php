@@ -15,10 +15,11 @@ class CreateGalaxiesTable extends Migration
     {
         Schema::create('galaxies', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('universe_id')->references('id')->on('universes')->onDelete('cascade');
+            $table->integer('universe_id')->unsigned();
             $table->string('name');
             $table->integer('type');
             $table->timestamps();
+            $table->foreign('universe_id')->references('id')->on('universes')->onDelete('cascade');
         });
     }
 
