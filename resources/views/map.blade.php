@@ -6,13 +6,11 @@
 </head>
 <body>
 
-<canvas id="myCanvas" width="1000px" height="1000px" style="border:1px solid #d3d3d3;">
+<canvas id="myCanvas" width="800px" height="800px" style="border:1px solid #000;">
         Your browser does not support the HTML5 canvas tag.</canvas>
 
 <script>
     var canvas= document.getElementById("myCanvas");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
     var stage = new createjs.Stage("myCanvas");
     var obj = [];
     var lines = [];
@@ -46,24 +44,35 @@
         lines = [];
         stage.update();
     }
-
     function addgrid(){
-        console.log(stage.x);
-        for(var i = -stage.x; i<-stage.x + canvas.width; i+=1) {
+        for(var i = -(stage.x -stage.regX*stage.scaleX); i<(stage.x-stage.regX/stage.scaleX) + canvas.width; i++) {
 
-                if(i%100 ==0) {
-                    var line = new createjs.Shape();
-                    line.graphics.setStrokeStyle(1 / stage.scaleX);
-                    line.graphics.beginStroke("#ff0000");
-                    line.graphics.moveTo(i / stage.scaleX + stage.regX, (-stage.y) / stage.scaleX + stage.regY);
-                    line.graphics.lineTo(i / stage.scaleX + stage.regX, (-stage.y + canvas.height) / stage.scaleX + stage.regY);
-//                    line.graphics.moveTo(i , -stage.y);
-//                    line.graphics.lineTo(i , -stage.y + canvas.height);
-                    line.graphics.endStroke();
-                    lines.push(line);
-                    stage.addChild(line);
-                }
+            if(i%10==0) {
+                var line = new createjs.Shape();
+                line.graphics.setStrokeStyle(1 / stage.scaleX);
+                line.graphics.beginStroke("#000");
+                line.graphics.moveTo(i, -(stage.y -stage.regY/stage.scaleX));
+                line.graphics.lineTo(i , -(stage.y -stage.regY/stage.scaleX) + canvas.height);
+                line.graphics.endStroke();
+                lines.push(line);
+                stage.addChild(line);
+            }
         }
+        stage.update();
+    }
+    function addbox(){
+        console.log(stage.x + ":" + stage.y);
+            var line = new createjs.Shape();
+            line.graphics.setStrokeStyle(1/stage.scaleX);
+            line.graphics.beginStroke("#000");
+            line.graphics.moveTo(50/stage.scaleX , 50/stage.scaleX);
+            line.graphics.lineTo(50/stage.scaleX, -50/stage.scaleX);
+            line.graphics.lineTo(-50/stage.scaleX, -50/stage.scaleX);
+            line.graphics.lineTo(-50/stage.scaleX, 50/stage.scaleX);
+            line.graphics.lineTo(50/stage.scaleX, 50/stage.scaleX);
+            line.graphics.endStroke();
+        //lines.push(line);
+            stage.addChild(line);
         stage.update();
     }
     function addCircle(r,x,y){
@@ -88,30 +97,47 @@
         var local = stage.globalToLocal(stage.mouseX, stage.mouseY);
         stage.regX=local.x;
         stage.regY=local.y;
-        console.log(stage.regX);
+        console.log(stage.scaleX);
         stage.x=stage.mouseX;
         stage.y=stage.mouseY;
         stage.scaleX=stage.scaleY*=zoom;
         removegrid();
         addgrid();
 
-
         stage.update();
     }
+    stage.enableMouseOver(10);
+    stage.addEventListener("stagemousemove", function(e) {
+        console.clear();
+        console.log("mouse:" +(stage.mouseX) + ":" + (stage.mouseY));
+        console.log("stage:" +(stage.x) + ":" + (stage.y));
+        console.log("reg:" +(stage.regX) + ":" + (stage.regY));
+        console.log("realcoords:" +(stage.x - stage.mouseX-stage.regX*stage.scaleX) + ":" + (stage.y -stage.mouseY-stage.regY*stage.scaleX));
+        console.log("cornercoords:" +(stage.x -stage.regX*stage.scaleX) + ":" + (stage.y -stage.regY*stage.scaleX));
 
-
+    });
     stage.addEventListener("stagemousedown", function(e) {
         var offset={x:stage.x-e.stageX,y:stage.y-e.stageY};
         stage.addEventListener("stagemousemove",function(ev) {
+            var local = stage.globalToLocal(stage.mouseX, stage.mouseY);
             stage.x = ev.stageX+offset.x;
             stage.y = ev.stageY+offset.y;
-            console.log(stage.x + ":" + stage.y);
             removegrid();
             addgrid();
             stage.update();
         });
         stage.addEventListener("stagemouseup", function(){
             stage.removeAllEventListeners("stagemousemove");
+            stage.addEventListener("stagemousemove", function(e) {
+                console.clear();
+                console.log("mouse:" +(stage.mouseX) + ":" + (stage.mouseY));
+                console.log("stage:" +(stage.x) + ":" + (stage.y));
+                console.log("reg:" +(stage.regX) + ":" + (stage.regY));
+                console.log("realcoords:" +(stage.x - stage.mouseX-stage.regX*stage.scaleX) + ":" + (stage.y -stage.mouseY-stage.regY*stage.scaleX));
+                console.log("cornercoords:" +(stage.x -stage.regX*stage.scaleX) + ":" + (stage.y -stage.regY*stage.scaleX));
+
+
+            });
         });
     });
 </script>
