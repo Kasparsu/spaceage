@@ -29,7 +29,11 @@
         console.log("hi");
         var i = 0;
         obj.forEach(function(el){
-                addCircle(1, el['X'], el['Y']);
+                if(i == 10) {
+                    addCircle(0.5, el['X'], el['Y']);
+                    i=0;
+                }
+            i++;
         });
         addgrid();
         stage.update();
@@ -42,18 +46,23 @@
         lines = [];
         stage.update();
     }
+
     function addgrid(){
-        for(var i = -stage.x; i<-stage.x + canvas.width; i=i+(canvas.width)/20) {
+        console.log(stage.x);
+        for(var i = -stage.x; i<-stage.x + canvas.width; i+=1) {
 
-
-            var line = new createjs.Shape();
-            line.graphics.setStrokeStyle(1/stage.scaleX);
-            line.graphics.beginStroke("#ff0000");
-            line.graphics.moveTo(i/stage.scaleX+stage.regX, (-stage.y)/stage.scaleX+ stage.regY);
-            line.graphics.lineTo(i/stage.scaleX+stage.regX, (-stage.y + canvas.height)/stage.scaleX+stage.regY);
-            line.graphics.endStroke();
-            lines.push(line);
-            stage.addChild(line);
+                if(i%100 ==0) {
+                    var line = new createjs.Shape();
+                    line.graphics.setStrokeStyle(1 / stage.scaleX);
+                    line.graphics.beginStroke("#ff0000");
+                    line.graphics.moveTo(i / stage.scaleX + stage.regX, (-stage.y) / stage.scaleX + stage.regY);
+                    line.graphics.lineTo(i / stage.scaleX + stage.regX, (-stage.y + canvas.height) / stage.scaleX + stage.regY);
+//                    line.graphics.moveTo(i , -stage.y);
+//                    line.graphics.lineTo(i , -stage.y + canvas.height);
+                    line.graphics.endStroke();
+                    lines.push(line);
+                    stage.addChild(line);
+                }
         }
         stage.update();
     }

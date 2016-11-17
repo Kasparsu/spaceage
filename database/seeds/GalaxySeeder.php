@@ -12,6 +12,11 @@ class GalaxySeeder extends Seeder
     public function run()
     {
         $points = $this->GenerateGalaxy(80000, 2, 3, 0.1, 3);
+        foreach($points as $key =>$point){
+            $points[$key][0] = round($point[0]*1000);
+            $points[$key][1] = round($point[1]*1000);
+        }
+        $points = array_map("unserialize", array_unique(array_map("serialize", $points)));
         DB::table('universes')->insert([
                                         'name' => str_random(10)
                                     ]);
@@ -21,11 +26,12 @@ class GalaxySeeder extends Seeder
                                              'type' => random_int(1,10)
                                          ]);
         foreach($points as $point){
+
             DB::table('star_systems')->insert([
                                                  'galaxy_id' => 1,
                                            'name' => str_random(10),
-                                           'X' => $point[0]*1000,
-                                           'Y' => $point[1]*1000,
+                                           'X' => $point[0],
+                                           'Y' => $point[1],
                                            'type' => random_int(1,10)
                                        ]);
         }
