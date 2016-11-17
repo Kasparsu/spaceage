@@ -12,6 +12,8 @@
 <script>
     var canvas= document.getElementById("myCanvas");
     var stage = new createjs.Stage("myCanvas");
+    stage.x = canvas.height/2;
+    stage.y = canvas.width/2;
     var obj = [];
     var lines = [];
     //img.src = 'http://www.pngall.com/wp-content/uploads/2016/07/Sun-PNG-HD.png';
@@ -33,6 +35,8 @@
                 }
             i++;
         });
+
+        addbox();
         addgrid();
         stage.update();
     }
@@ -45,14 +49,30 @@
         stage.update();
     }
     function addgrid(){
-        for(var i = -(stage.x -stage.regX*stage.scaleX); i<(stage.x-stage.regX/stage.scaleX) + canvas.width; i++) {
 
-            if(i%10==0) {
+        for(var i = Math.round(-(stage.x -stage.regX*stage.scaleX)/stage.scaleX); i<(-(stage.x -stage.regX*stage.scaleX)+ canvas.width)/stage.scaleX ; i=i + 0.1) {
+            console.log(i.toFixed(1));
+            if(Math.abs(i.toFixed(1)%(64/stage.scaleX))==0.5) {
+                console.log(i);
                 var line = new createjs.Shape();
                 line.graphics.setStrokeStyle(1 / stage.scaleX);
                 line.graphics.beginStroke("#000");
-                line.graphics.moveTo(i, -(stage.y -stage.regY/stage.scaleX));
-                line.graphics.lineTo(i , -(stage.y -stage.regY/stage.scaleX) + canvas.height);
+                line.graphics.moveTo(i, -(stage.y -stage.regY*stage.scaleX)/stage.scaleX);
+                line.graphics.lineTo(i , -(stage.y -stage.regY*stage.scaleX-canvas.height)/stage.scaleX);
+                line.graphics.endStroke();
+                lines.push(line);
+                stage.addChild(line);
+            }
+        }
+        for(i = Math.round(-(stage.y -stage.regY*stage.scaleX)/stage.scaleX); i<(-(stage.y -stage.regY*stage.scaleX-canvas.height)/stage.scaleX) ; i+=0.1) {
+
+            if(Math.abs(i.toFixed(1)%(64/stage.scaleX))==0.5) {
+                console.log(i);
+                line = new createjs.Shape();
+                line.graphics.setStrokeStyle(1 / stage.scaleX);
+                line.graphics.beginStroke("#000");
+                line.graphics.moveTo(-(stage.x -stage.regX*stage.scaleX)/stage.scaleX, i);
+                line.graphics.lineTo((-(stage.x -stage.regX*stage.scaleX)+ canvas.width)/stage.scaleX , i);
                 line.graphics.endStroke();
                 lines.push(line);
                 stage.addChild(line);
@@ -108,7 +128,6 @@
     }
     stage.enableMouseOver(10);
     stage.addEventListener("stagemousemove", function(e) {
-        console.clear();
         console.log("mouse:" +(stage.mouseX) + ":" + (stage.mouseY));
         console.log("stage:" +(stage.x) + ":" + (stage.y));
         console.log("reg:" +(stage.regX) + ":" + (stage.regY));
@@ -129,13 +148,16 @@
         stage.addEventListener("stagemouseup", function(){
             stage.removeAllEventListeners("stagemousemove");
             stage.addEventListener("stagemousemove", function(e) {
-                console.clear();
+
                 console.log("mouse:" +(stage.mouseX) + ":" + (stage.mouseY));
                 console.log("stage:" +(stage.x) + ":" + (stage.y));
                 console.log("reg:" +(stage.regX) + ":" + (stage.regY));
-                console.log("realcoords:" +(stage.x - stage.mouseX-stage.regX*stage.scaleX) + ":" + (stage.y -stage.mouseY-stage.regY*stage.scaleX));
-                console.log("cornercoords:" +(stage.x -stage.regX*stage.scaleX) + ":" + (stage.y -stage.regY*stage.scaleX));
-
+                console.log("realcoords:" + -(stage.x - stage.mouseX-stage.regX*stage.scaleX)/stage.scaleX + ":" + -(stage.y -stage.mouseY-stage.regY*stage.scaleX)/stage.scaleX);
+                console.log("cornercoords:" + -(stage.x -stage.regX*stage.scaleX)/stage.scaleX + ":" + -(stage.y -stage.regY*stage.scaleX)/stage.scaleX);
+                console.log("topcornergrid:" + -(stage.x -stage.regX*stage.scaleX)/stage.scaleX + ":" + -(stage.y -stage.regY*stage.scaleX)/stage.scaleX);
+                console.log("bottomcornergrid:" + (-(stage.x -stage.regX*stage.scaleX)+ canvas.width)/stage.scaleX + ":" + -(stage.y -stage.regY*stage.scaleX-canvas.height)/stage.scaleX);
+                console.log("lengthgrid:" + (-(stage.y -stage.regY*stage.scaleX) - (-(stage.y -stage.regY*stage.scaleX) + canvas.height)));
+                console.log(1%128/stage.scaleX);
 
             });
         });
