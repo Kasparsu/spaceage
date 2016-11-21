@@ -13,3 +13,4 @@
 
 Route::get('/', 'GalaxyController@index');
 Route::get('/data', 'GalaxyController@data');
+Route::get('/solar', 'GalaxyController@solar');

@@ -14,13 +14,17 @@ class GalaxyController extends Controller
      */
     public function index()
     {
-        return view('map');
+
 
     }
     public function data()
     {
         $points = StarSystem::all();
         echo(json_encode($points));
+    }
+    public function solar()
+    {
+        return view('solar');
     }
 
     /**
