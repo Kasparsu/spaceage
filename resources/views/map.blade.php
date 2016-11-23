@@ -5,8 +5,10 @@
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
     <script src="https://unpkg.com/supercluster@2.2.0/dist/supercluster.min.js"></script>
-    <script type="text/javascript" src="js/L.Grid.js"></script>
-    <link rel="stylesheet" href="css/L.Grid.css" />
+    <script type="text/javascript" src="js/L.simpleGraticule.js"></script>
+    <link rel="stylesheet" href="css/L.simpleGraticule.css" />
+    <script src="js/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
     <style>
         #mapid{
             height: 800px;
@@ -18,15 +20,15 @@
 <div id="mapid"></div>
 
 <script>
+
+    // map initialison
     var map = L.map('mapid', {
         crs: L.CRS.Simple,
-        zoom:3,
-        minZoom:2,
-        maxZoom:7,
-        grid: {
-                2: 1, 3: 1, 4: .5, 5: .5, 6: .1, 7: .1, strokeStyle: "rgba(60,90,120,0.85)", limit: [0, 15.36]
-        }
+        minZoom: -2,
+        maxZoom:6,
     });
+
+/// load markers
         $.ajax({
             url: "data",
             cache: false
@@ -34,22 +36,48 @@
             obj = JSON.parse(html);
             draw(obj);
         });
-    var bounds = [[0,0], [1000,1000]];
+    // set map bounds
+    var bounds = [[0,0], [1000 ,1000]];
     map.fitBounds(bounds);
+    //set grid options
+    var options = {interval: 20,
+        showOriginLabel: false,
+        redraw: 'move',
+        zoomIntervals: [
+            {start: -10, end: -2, interval: 500},
+            {start: -2, end: -1, interval: 100},
+            {start: 0, end: 1, interval: 50},
+            {start: 2, end: 3, interval: 10},
+            {start: 4, end: 20, interval: 1}
+        ]};
 
+    L.simpleGraticule(options).addTo(map);
+    // custom marker
 
+    var star = L.icon({
+        iconUrl: 'img/Sun-PNG-LD.png',
+
+        iconSize:     [50, 50], // size of the icon
+        iconAnchor:   [25, 25], // point of the icon which will correspond to marker's location
+        popupAnchor:  [0, 50] // point from which the popup should open relative to the iconAnchor
+    });
+
+    // handle drawinf markers
     function draw(obj) {
-            console.log("hi");
             var i = 0;
+        var markers = L.markerClusterGroup({
+            disableClusteringAtZoom:6
+        });
             obj.forEach(function(el){
-                    if(i == 100) {
-
-                        L.marker(L.latLng([ el['Y'], el['X'] ])).addTo(map);
-                        i=0;
-                    }
+                markers.addLayer(L.marker(L.latLng([ el['Y'], el['X'] ]), {icon: star}).on('dblclick', onDblClick));
                 i++;
             });
+        map.addLayer(markers);
         }
+
+    function onDblClick(e){
+        console.log(this.getLatLng())
+    }
 //    var canvas= document.getElementById("myCanvas");
 //    var stage = new createjs.Stage("myCanvas");
 //    stage.x = canvas.height/2;

@@ -22,7 +22,9 @@ class GalaxyController extends Controller
         $points = StarSystem::all();
         echo(json_encode($points));
     }
-
+    public function solar(){
+        return view('solar');
+    }
     /**
      * Show the form for creating a new resource.
      *
