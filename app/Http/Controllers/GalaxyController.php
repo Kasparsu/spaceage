@@ -14,7 +14,7 @@ class GalaxyController extends Controller
      */
     public function index()
     {
-        return view('map');
+
 
     }
     public function data()
@@ -22,9 +22,13 @@ class GalaxyController extends Controller
         $points = StarSystem::all();
         echo(json_encode($points));
     }
-    public function solar(){
+
+    public function solar()
+    {
         return view('solar');
     }
+
+
     /**
      * Show the form for creating a new resource.
      *

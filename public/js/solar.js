@@ -1,4 +1,5 @@
-$(window).on('load',function(){
+$(window).on('load', function(){
+
 
   var body = $("body"),
       universe = $("#universe"),

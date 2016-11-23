@@ -1,4 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
+@import url(font.css);
+
 /*
   Copyright (c) 2012 Julian Garnier
   Licensed under the MIT license
@@ -89,7 +90,9 @@ body {
   animation-iteration-count: infinite;
   animation-timing-function: linear; }
 
-div#solar-system div:nth-child(9), .planet, div#solar-system div:nth-child(3) .moon {
+
+#sun, .planet, #earth .moon {
+
   position: absolute;
   top: 50%;
   left: 50%;
@@ -100,7 +103,9 @@ div#solar-system div:nth-child(9), .planet, div#solar-system div:nth-child(3) .m
   border-radius: 50%;
   transform-style: preserve-3d; }
 
-div#solar-system div:nth-child(9) {
+
+#sun {
+
   background-color: #FB7209;
   background-repeat: no-repeat;
   background-size: cover;
@@ -119,7 +124,8 @@ div#solar-system div:nth-child(9) {
   left: 50%;
   border-radius: 50%; }
 
-div#solar-system div:nth-child(6) .ring {
+
+#saturn .ring {
   width: 2em;
   height: 2em;
   margin-top: -1em;
@@ -128,7 +134,9 @@ div#solar-system div:nth-child(6) .ring {
   animation-iteration-count: infinite;
   animation-timing-function: linear; }
 
-div#solar-system div:nth-child(6) .ring:after {
+
+#saturn .ring:after {
+
   border-radius: 50%;
   position: absolute;
   content: '';
@@ -143,34 +151,34 @@ div#solar-system div:nth-child(6) .ring:after {
   box-sizing: border-box; }
 
 /* --------------------------------------------------------------------------- planets index */
-#solar-system:nth-child(1) {
+
+#mercury {
   z-index: 10; }
 
-#solar-system:nth-child(2) {
+#venus {
   z-index: 9; }
 
-#solar-system:nth-child(3) {
+#earth {
   z-index: 8; }
 
-#solar-system:nth-child(4) {
+#moon {
   z-index: 7; }
 
-#solar-system:nth-child(5) {
+#mars {
   z-index: 6; }
 
-#solar-system:nth-child(6) {
+#jupiter {
   z-index: 5; }
 
-#solar-system:nth-child(7) {
+#saturn {
   z-index: 4; }
 
-#solar-system:nth-child(8) {
+#uranus {
   z-index: 3; }
 
-#solar-system:nth-child(9) {
-  z-index: 2; }
 
-#solar-system:nth-child(10) {
+#sun {
+
   z-index: 1; }
 
 /* --------------------------------------------------------------------------- animations */
@@ -196,7 +204,8 @@ div#solar-system div:nth-child(6) .ring:after {
     transform: rotateX(-90deg) rotateY(0deg) rotateZ(0deg); } }
 
 /* --------------------------------------------------------------------------- opening */
-.view-3D .opening div#solar-system div:nth-child(9),
+
+.view-3D .opening #sun,
 .view-3D .opening .orbit,
 .view-3D .opening .pos,
 .view-3D .opening .planet,
@@ -204,17 +213,21 @@ div#solar-system div:nth-child(6) .ring:after {
 .view-3D .opening .ring {
   transition-duration: 4s; }
 
-#universe.opening div#solar-system div:nth-child(9) {
+
+#universe.opening #sun {
   box-shadow: 0 0 0 rgba(255, 160, 60, 0); }
 
 /* --------------------------------------------------------------------------- 2D view */
-.view-2D.zoom-large div#solar-system div:nth-child(9) {
+.view-2D.zoom-large #sun {
+
   transform-style: flat; }
 
 .view-2D.zoom-large .orbit {
   transform-style: flat; }
 
-.view-2D div#solar-system div:nth-child(9),
+
+.view-2D #sun,
+
 .view-2D .ring {
   transform: rotateX(0deg); }
 
@@ -223,7 +236,9 @@ div#solar-system div:nth-child(6) .ring:after {
   transform: rotateX(90deg); }
 
 /* --------------------------------------------------------------------------- 3D view */
-.view-3D.zoom-large div#solar-system div:nth-child(9) {
+
+.view-3D.zoom-large #sun {
+
   transform-style: preserve-3d; }
 
 .view-3D.zoom-large .orbit {
@@ -232,7 +247,8 @@ div#solar-system div:nth-child(6) .ring:after {
 .view-3D #solar-system {
   transform: rotateX(75deg); }
 
-.view-3D div#solar-system div:nth-child(9) {
+.view-3D #sun {
+
   transform: rotateX(-90deg); }
 
 .view-3D .ring {
@@ -316,179 +332,175 @@ div#solar-system div:nth-child(6) .ring:after {
 /* --------------------------------------------------------------------------- data */
 /* --------------------------------------------------------------------------- speed */
 /* sideral years */
-div#solar-system div:nth-child(1) .pos,
-div#solar-system div:nth-child(1) .planet,
-div#solar-system div:nth-child(1).orbit {
+
+#mercury .pos,
+#mercury .planet,
+#mercury.orbit {
   animation-duration: 2.89016s; }
 
-div#solar-system div:nth-child(2) .pos,
-div#solar-system div:nth-child(2) .planet,
-div#solar-system div:nth-child(2).orbit {
+#venus .pos,
+#venus .planet,
+#venus.orbit {
   animation-duration: 7.38237s; }
 
-div#solar-system div:nth-child(3) .pos,
-div#solar-system div:nth-child(3) .planet,
-div#solar-system div:nth-child(3).orbit {
+#earth .pos,
+#earth .planet,
+#earth.orbit {
   animation-duration: 12.00021s; }
 
-div#solar-system div:nth-child(3) .orbit .pos,
-div#solar-system div:nth-child(3) .orbit {
+#earth .orbit .pos,
+#earth .orbit {
   animation-duration: 0.89764s; }
 
-div#solar-system div:nth-child(4) .pos,
-div#solar-system div:nth-child(4) .planet,
-div#solar-system div:nth-child(4).orbit {
+#mars .pos,
+#mars .planet,
+#mars.orbit {
   animation-duration: 22.57017s; }
 
-div#solar-system div:nth-child(5) .pos,
-div#solar-system div:nth-child(5) .planet,
-div#solar-system div:nth-child(5).orbit {
+#jupiter .pos,
+#jupiter .planet,
+#jupiter.orbit {
   animation-duration: 142.35138s; }
 
-div#solar-system div:nth-child(6) .pos,
-div#solar-system div:nth-child(6) .planet,
-div#solar-system div:nth-child(6).orbit,
-div#solar-system div:nth-child(6) .ring {
+#saturn .pos,
+#saturn .planet,
+#saturn.orbit,
+#saturn .ring {
   animation-duration: 353.36998s; }
 
-div#solar-system div:nth-child(7) .pos,
-div#solar-system div:nth-child(7) .planet,
-div#solar-system div:nth-child(7).orbit {
+#uranus .pos,
+#uranus .planet,
+#uranus.orbit {
   animation-duration: 1008.20215s; }
 
-div#solar-system div:nth-child(8) .pos,
-div#solar-system div:nth-child(8) .planet,
-div#solar-system div:nth-child(8).orbit {
-  animation-duration: 1977.49584s; }
 
 /* --------------------------------------------------------------------------- planets sizes */
 /* --------------------------------------------------------------------------- stretched sizes */
-.scale-stretched div#solar-system div:nth-child(9) {
+.scale-stretched #sun {
   font-size: 24em; }
 
-.scale-stretched div#solar-system div:nth-child(1) .planet {
+.scale-stretched #mercury .planet {
   font-size: 1.5em; }
 
-.scale-stretched div#solar-system div:nth-child(2) .planet {
+.scale-stretched #venus .planet {
   font-size: 3.72em; }
 
-.scale-stretched div#solar-system div:nth-child(3) .planet {
+.scale-stretched #earth .planet {
   font-size: 3.92em; }
 
-.scale-stretched div#solar-system div:nth-child(3) .moon {
+.scale-stretched #earth .moon {
   font-size: 1.2em; }
 
-.scale-stretched div#solar-system div:nth-child(4) .planet {
+.scale-stretched #mars .planet {
   font-size: 2.9em; }
 
-.scale-stretched div#solar-system div:nth-child(5) .planet {
+.scale-stretched #jupiter .planet {
   font-size: 12em; }
 
-.scale-stretched div#solar-system div:nth-child(6) .planet {
+.scale-stretched #saturn .planet {
   font-size: 10.8em; }
 
-.scale-stretched div#solar-system div:nth-child(7) .planet {
+.scale-stretched #uranus .planet {
   font-size: 4.68em; }
 
-.scale-stretched div#solar-system div:nth-child(8) .planet {
-  font-size: 4.9em; }
 
 
 /* --------------------------------------------------------------------------- stretched orbits */
-.scale-stretched div#solar-system div:nth-child(1).orbit {
-  width: 32em;
-  height: 32em;
-  margin-top: -16em;
-  margin-left: -16em; }
 
-.scale-stretched div#solar-system div:nth-child(2).orbit {
+.scale-stretched #venus.orbit {
   width: 40em;
   height: 40em;
   margin-top: -20em;
   margin-left: -20em; }
 
-.scale-stretched div#solar-system div:nth-child(3).orbit {
+
+.scale-stretched #earth.orbit {
   width: 56em;
   height: 56em;
   margin-top: -28em;
   margin-left: -28em; }
 
-.scale-stretched div#solar-system div:nth-child(3) .orbit {
+
+.scale-stretched #earth .orbit {
+
   width: 6em;
   height: 6em;
   margin-top: -3em;
   margin-left: -3em; }
 
-.scale-stretched div#solar-system div:nth-child(4).orbit {
+
+.scale-stretched #mars.orbit {
   width: 72em;
   height: 72em;
   margin-top: -36em;
   margin-left: -36em; }
 
-.scale-stretched div#solar-system div:nth-child(5).orbit {
+
+.scale-stretched #jupiter.orbit {
+
   width: 100em;
   height: 100em;
   margin-top: -50em;
   margin-left: -50em; }
 
-.scale-stretched div#solar-system div:nth-child(6).orbit {
+.scale-stretched #saturn.orbit {
   width: 150em;
   height: 150em;
   margin-top: -75em;
   margin-left: -75em; }
 
-.scale-stretched div#solar-system div:nth-child(7).orbit {
+.scale-stretched #uranus.orbit {
   width: 186em;
   height: 186em;
   margin-top: -93em;
   margin-left: -93em; }
 
-.scale-stretched div#solar-system div:nth-child(8).orbit {
-  width: 210em;
-  height: 210em;
-  margin-top: -105em;
-  margin-left: -105em; }
+
+
+
 
 /* --------------------------------------------------------------------------- text infos data */
 /* --------------------------------------------------------------------------- speed */
 .set-speed dl.infos dd span:after {
   content: 'Orbit Velocity'; }
 
-.set-speed div#solar-system div:nth-child(9) dl.infos dd:after {
+.set-speed #sun dl.infos dd:after {
   content: '0 km/h'; }
 
-.set-speed div#solar-system div:nth-child(1) dl.infos dd:after {
+.set-speed #mercury dl.infos dd:after {
   content: '170,503 km/h'; }
 
-.set-speed div#solar-system div:nth-child(2) dl.infos dd:after {
+.set-speed #venus dl.infos dd:after {
   content: '126,074 km/h'; }
 
-.set-speed div#solar-system div:nth-child(3) dl.infos dd:after {
+.set-speed #earth dl.infos dd:after {
   content: '107,218 km/h'; }
 
-.set-speed div#solar-system div:nth-child(4) dl.infos dd:after {
+.set-speed #mars dl.infos dd:after {
   content: '86,677 km/h'; }
 
-.set-speed div#solar-system div:nth-child(5) dl.infos dd:after {
+.set-speed #jupiter dl.infos dd:after {
   content: '47,002 km/h'; }
 
-.set-speed div#solar-system div:nth-child(6) dl.infos dd:after {
+.set-speed #saturn dl.infos dd:after {
   content: '34,701 km/h'; }
 
-.set-speed div#solar-system div:nth-child(7) dl.infos dd:after {
+.set-speed #uranus dl.infos dd:after {
   content: '24,477 km/h'; }
 
-.set-speed div#solar-system div:nth-child(8) dl.infos dd:after {
+.set-speed #neptune dl.infos dd:after {
+
   content: '19,566 km/h'; }
 
 
 /* --------------------------------------------------------------------------- planets starting position and lighting effect */
 /* --------------------------------------------------------------------------- mercury ; pos: Top */
-div#solar-system div:nth-child(1) .pos {
+
+#mercury .pos {
   left: 50%;
   top: -1%; }
 
-div#solar-system div:nth-child(1) .planet {
+#mercury .planet {
   animation-name: shadow-mercury; }
 
 @keyframes shadow-mercury {
@@ -516,17 +528,21 @@ div#solar-system div:nth-child(1) .planet {
     box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5);
     /* TOP */ } }
 
-.scaled.view-2D div#solar-system div:nth-child(1) .planet,
-.scaled.view-3D div#solar-system div:nth-child(1) .planet {
+
+.scaled.view-2D #mercury .planet,
+.scaled.view-3D #mercury .planet {
+
   box-shadow: inset -4px 0 2px rgba(0, 0, 0, 0.5);
   /* RIGHT */ }
 
 /* --------------------------------------------------------------------------- venus ; pos: Left */
-div#solar-system div:nth-child(2) .pos {
+
+#venus .pos {
   left: 0;
   top: 50%; }
 
-div#solar-system div:nth-child(2) .planet {
+#venus .planet {
+
   animation-name: shadow-venus; }
 
 @keyframes shadow-venus {
@@ -554,17 +570,21 @@ div#solar-system div:nth-child(2) .planet {
     box-shadow: inset 4px 0 2px rgba(0, 0, 0, 0.5);
     /* LEFT */ } }
 
-.scaled.view-2D div#solar-system div:nth-child(2) .planet,
-.scaled.view-3D div#solar-system div:nth-child(2) .planet {
+
+.scaled.view-2D #venus .planet,
+.scaled.view-3D #venus .planet {
+
   box-shadow: inset -4px 0 2px rgba(0, 0, 0, 0.5);
   /* RIGHT */ }
 
 /* --------------------------------------------------------------------------- earth ; pos: Right */
-div#solar-system div:nth-child(3) .pos {
+
+#earth .pos {
   left: 100%;
   top: 50%; }
 
-div#solar-system div:nth-child(3) .planet {
+#earth .planet {
+
   animation-name: shadow-earth; }
 
 @keyframes shadow-earth {
@@ -591,23 +611,27 @@ div#solar-system div:nth-child(3) .planet {
   100% {
     box-shadow: inset -4px 0 2px rgba(0, 0, 0, 0.5);
     /* RIGHT */ } }
+.scaled.view-2D #earth .planet,
+.scaled.view-3D #earth .planet {
 
-.scaled.view-2D div#solar-system div:nth-child(3) .planet,
-.scaled.view-3D div#solar-system div:nth-child(3) .planet {
   box-shadow: inset -4px 0 2px rgba(0, 0, 0, 0.5);
   /* RIGHT */ }
 
 /* --------------------------------------------------------------------------- moon */
-div#solar-system div:nth-child(3) .orbit .pos {
+
+#earth .orbit .pos {
+
   left: 100%;
   top: 50%; }
 
 /* --------------------------------------------------------------------------- mars ; pos: Bottom */
-div#solar-system div:nth-child(4) .pos {
+
+#mars .pos {
   left: 50%;
   top: 100%; }
 
-div#solar-system div:nth-child(4) .planet {
+#mars .planet {
+
   animation-name: shadow-mars; }
 
 @keyframes shadow-mars {
@@ -635,17 +659,21 @@ div#solar-system div:nth-child(4) .planet {
     box-shadow: inset -18px -10px 10px rgba(0, 0, 0, 0.5);
     /* BOTTOM */ } }
 
-.scaled.view-2D div#solar-system div:nth-child(4) .planet,
-.scaled.view-3D div#solar-system div:nth-child(4) .planet {
+
+.scaled.view-2D #mars .planet,
+.scaled.view-3D #mars .planet {
+
   box-shadow: inset -4px 0 2px rgba(0, 0, 0, 0.5);
   /* RIGHT */ }
 
 /* --------------------------------------------------------------------------- jupiter ; pos: Right */
-div#solar-system div:nth-child(5) .pos {
+
+#jupiter .pos {
   left: 100%;
   top: 50%; }
 
-div#solar-system div:nth-child(5) .planet {
+#jupiter .planet {
+
   animation-name: shadow-jupiter; }
 
 @keyframes shadow-jupiter {
@@ -673,17 +701,21 @@ div#solar-system div:nth-child(5) .planet {
     box-shadow: inset -16px 0 5px rgba(0, 0, 0, 0.5);
     /* RIGHT */ } }
 
-.scaled.view-2D div#solar-system div:nth-child(5) .planet,
-.scaled.view-3D div#solar-system div:nth-child(5) .planet {
+
+.scaled.view-2D #jupiter .planet,
+.scaled.view-3D #jupiter .planet {
+
   box-shadow: inset -16px 0 5px rgba(0, 0, 0, 0.5);
   /* RIGHT */ }
 
 /* --------------------------------------------------------------------------- saturn ; pos: Left */
-div#solar-system div:nth-child(6) .pos {
+
+#saturn .pos {
   left: 0%;
   top: 50%; }
 
-div#solar-system div:nth-child(6) .planet {
+#saturn .planet {
+
   animation-name: shadow-saturn; }
 
 @keyframes shadow-saturn {
@@ -711,35 +743,23 @@ div#solar-system div:nth-child(6) .planet {
     box-shadow: inset 16px 0 5px rgba(0, 0, 0, 0.5);
     /* LEFT */ } }
 
-.scaled.view-2D div#solar-system div:nth-child(6) .planet,
-.scaled.view-3D div#solar-system div:nth-child(6) .planet {
-  box-shadow: inset -16px 0 5px rgba(0, 0, 0, 0.5);
-  /* RIGHT */ }
 
-/* --------------------------------------------------------------------------- saturn ring */
-/*
+.scaled.view-2D #saturn .planet,
+.scaled.view-3D #saturn .planet {
 
-div#solar-system div:nth-child(6) .ring           { animation-name:     shadow-saturn-ring; }
+}
 
-@keyframes 
-shadow-saturn-ring{ 0%   { box-shadow: inset -16px  0      4px   rgba(20, 40, 50, 0.45); opacity: .4; }
-                  25%    { box-shadow: inset -5px   -30px   12px  rgba(20, 40, 50, 0.3);  opacity: 1; }
-                  25.01% { box-shadow: inset 5px    -30px   12px  rgba(20, 40, 50, 0.3);  opacity: 1; }
-                  50%    { box-shadow: inset 16px   0      4px   rgba(20, 40, 50, 0.45);  opacity: .4; }
-                  75%    { box-shadow: inset 0      30px  50px  rgba(20, 40, 50, 0);  opacity: .3; }
-                  100%   { box-shadow: inset -16px  0      4px   rgba(20, 40, 50, 0.45);  opacity: .4; }
-                }
+.scaled.view-2D #saturn .ring,
+.scaled.view-3D #saturn .ring { box-shadow: inset 16px   0      4px   rgba(20, 40, 50, 0.6); }
 
-.scaled.view-2D div#solar-system div:nth-child(6) .ring,
-.scaled.view-3D div#solar-system div:nth-child(6) .ring { box-shadow: inset 16px   0      4px   rgba(20, 40, 50, 0.6); }
 
-*/
 /* --------------------------------------------------------------------------- uranus ; pos: Left */
-div#solar-system div:nth-child(7) .pos {
+#uranus .pos {
   left: 0;
   top: 50%; }
 
-div#solar-system div:nth-child(7) .planet {
+#uranus .planet {
+
   animation-name: shadow-uranus; }
 
 @keyframes shadow-uranus {
@@ -767,17 +787,20 @@ div#solar-system div:nth-child(7) .planet {
     box-shadow: inset 8px 0 5px rgba(0, 0, 0, 0.5);
     /* LEFT */ } }
 
-.scaled.view-2D div#solar-system div:nth-child(7) .planet,
-.scaled.view-3D div#solar-system div:nth-child(7) .planet {
+.scaled.view-2D #uranus .planet,
+.scaled.view-3D #uranus .planet {
+
   box-shadow: inset -8px 0 5px rgba(0, 0, 0, 0.5);
   /* RIGHT */ }
 
 /* --------------------------------------------------------------------------- neptune ; pos: Top */
-div#solar-system div:nth-child(8) .pos {
+
+#neptune .pos {
   left: 50%;
   top: 0; }
 
-div#solar-system div:nth-child(8) .planet {
+#neptune .planet {
+
   animation-name: shadow-neptune; }
 
 @keyframes shadow-neptune {
@@ -805,14 +828,20 @@ div#solar-system div:nth-child(8) .planet {
     box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
     /* TOP */ } }
 
-.scaled.view-2D div#solar-system div:nth-child(8) .planet,
-.scaled.view-3D div#solar-system div:nth-child(8) .planet {
+
+.scaled.view-2D #neptune .planet,
+.scaled.view-3D #neptune .planet {
   box-shadow: inset -12px 0 5px rgba(0, 0, 0, 0.5);
   /* RIGHT */ }
 
 /* --------------------------------------------------------------------------- DEBUG 
+<<<<<<< HEAD
 .pos, 
 .planet, 
+=======
+.pos,
+.planet,
+>>>>>>> 4546462cdb5ad8a5e5ba112d8ba4ae3eed59f326
 .orbit,
 .ring { animation-duration: 20s!important; }
 
@@ -871,27 +900,30 @@ dl.infos dd span:after {
   font-size: 11px;
   text-shadow: 1px 1px 2px black; }
 
-.sun div#solar-system div:nth-child(9) .infos,
-.mercury div#solar-system div:nth-child(1) .infos,
-.venus div#solar-system div:nth-child(2) .infos,
-.earth div#solar-system div:nth-child(3) .infos,
-.mars div#solar-system div:nth-child(4) .infos,
-.jupiter div#solar-system div:nth-child(5) .infos,
-.saturn div#solar-system div:nth-child(6) .infos,
-.uranus div#solar-system div:nth-child(7) .infos,
-.neptune div#solar-system div:nth-child(8) .infos {
+
+.sun #sun .infos,
+.mercury #mercury .infos,
+.venus #venus .infos,
+.earth #earth .infos,
+.mars #mars .infos,
+.jupiter #jupiter .infos,
+.saturn #saturn .infos,
+.uranus #uranus .infos,
+.neptune #neptune .infos {
+
   display: block;
   opacity: 1;
   transform: rotateX(0deg); }
 
-.mercury div#solar-system div:nth-child(1).orbit,
-.venus div#solar-system div:nth-child(2).orbit,
-.earth div#solar-system div:nth-child(3).orbit,
-.mars div#solar-system div:nth-child(4).orbit,
-.jupiter div#solar-system div:nth-child(5).orbit,
-.saturn div#solar-system div:nth-child(6).orbit,
-.uranus div#solar-system div:nth-child(7).orbit,
-.neptune div#solar-system div:nth-child(8).orbit {
+.mercury #mercury.orbit,
+.venus #venus.orbit,
+.earth #earth.orbit,
+.mars #mars.orbit,
+.jupiter #jupiter.orbit,
+.saturn #saturn.orbit,
+.uranus #uranus.orbit,
+.neptune #neptune.orbit {
+
   border: 1px solid rgba(255, 255, 255, 0.8); }
 
 .hide-UI h1,
@@ -932,7 +964,7 @@ h1 span, #navbar h1 a {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 0;
+  padding: 16px;
   width: 100%;
   height: 48px; }
 
@@ -1099,11 +1131,12 @@ h1 span, #navbar h1 a {
 .ring {
   transition-property: width, height, top, left, margin-left, margin-top, webkit-transform; }
 
-div#solar-system div:nth-child(9), .icon {
+
+#sun, .icon {
   transition-property: width, height, webkit-transform; }
 
 #solar-system,
-div#solar-system div:nth-child(9),
+#sun,
 .orbit,
 .pos,
 .planet,
@@ -1115,7 +1148,7 @@ div#solar-system div:nth-child(9),
   transition-timing-function: ease-in-out; }
 
 #solar-system,
-div#solar-system div:nth-child(9),
+#sun,
 .planet,
 .satelite,
 .ring {
@@ -1125,7 +1158,9 @@ div#solar-system div:nth-child(9),
   transition-delay: 1s; }
 
 .opening #solar-system,
-.opening div#solar-system div:nth-child(9),
+
+.opening #sun,
+
 .opening .orbit,
 .opening .pos,
 .opening .planet,
@@ -1163,35 +1198,33 @@ body {
 #universe {
   background-image: url(../img/background.png); }
 
-div#solar-system div:nth-child(9) {
+#sun {
   background-image: url(../img/sun.png); }
 
-div#solar-system div:nth-child(1) .planet {
+#mercury .planet {
   background-image: url(../img/mercury.png); }
 
-div#solar-system div:nth-child(2) .planet {
+#venus .planet {
   background-image: url(../img/venus.png); }
 
-div#solar-system div:nth-child(3) .planet {
+#earth .planet {
   background-image: url(../img/earth.png); }
 
-div#solar-system div:nth-child(3) .moon {
+#earth .moon {
   background-color: white; }
 
-div#solar-system div:nth-child(4) .planet {
+#mars .planet {
   background-image: url(../img/mars.png); }
 
-div#solar-system div:nth-child(5) .planet {
+#jupiter .planet {
   background-image: url(../img/jupiter.png); }
 
-div#solar-system div:nth-child(6) .planet {
+#saturn .planet {
   background-image: url(../img/saturn.png); }
 
-div#solar-system div:nth-child(7) .planet {
+#uranus .planet {
   background-image: url(../img/uranus.png); }
 
-div#solar-system div:nth-child(8) .planet {
-  background-image: url(../img/neptune.png); }
 
 /* --------------------------------------------------------------------------- responsive styles */
 @media screen and (max-width: 299px) {

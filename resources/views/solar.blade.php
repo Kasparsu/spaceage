@@ -1,6 +1,13 @@
-<html>
+
+<!DOCTYPE html>
+<html >
 <head>
-    <link rel="stylesheet" href="css/solar.css" />
+    <meta charset="UTF-8">
+    <title>CSS 3D Solar System</title>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/prefixfree.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/solar.css">
+
 </head>
 
 <body>
@@ -31,7 +38,8 @@
 <div id="universe" class="scale-stretched">
     <div id="galaxy">
         <div id="solar-system" class="earth">
-            <div id="mercury" class="orbit">
+            <div id="mercury" class="orbit" style="width: 32em; height: 32em; margin-top: -16em; margin-left: -16em;">
+
                 <div class="pos">
                     <div class="planet">
                         <dl class="infos">
@@ -107,9 +115,10 @@
                     </div>
                 </div>
             </div>
-            <div id="neptune" class="orbit">
-                <div class="pos">
-                    <div class="planet">
+            <div id="neptune" class="orbit" style="width: 210em; height: 210em; margin-top: -105em; margin-left: -105em; animation-duration: 10s; z-index: 2; animation-delay: 0s;">
+                <div class="pos" style="animation-duration: 10s;  left: 50%; top: 0%; animation-delay: -5s;">
+                    <div class="planet" style="font-size: 4.9em; animation-duration: 10s; animation-delay: -5s; background-image: url(img/sun.png);">
+
                         <dl class="infos">
                             <dt>Neptune</dt>
                             <dd><span></span></dd>
@@ -127,11 +136,14 @@
     </div>
 </div>
 
-<script src="js/prefixfree.min.js"></script>
 </body>
-<script src='js/jquery-3.1.1.min.js'></script>
+
 
 <script src="js/solar.js"></script>
+<script>
+    $("div#neptune.orbit").css('animation-delay','-5s');
+</script>
 
 </body>
 </html>
+
