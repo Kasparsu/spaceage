@@ -6,6 +6,10 @@
 
 .leaflet-grid-label .gridlabel-vert,
 .leaflet-grid-label .gridlabel-horiz {
-    padding-left:2px;
-    text-shadow: -2px 0 #FFFFFF, 0 2px #FFFFFF, 2px 0 #FFFFFF, 0 -2px #FFFFFF;
+    padding-left: 2px;
+    text-shadow: -2px 0 #333333, 0 2px #333333, 2px 0 #333333, 0 -2px #333333;
+    color: #fff;
+}
+.leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-image-layer, .leaflet-pane > svg path, .leaflet-tile-container {
+    stroke: #4C4C4C;
 }

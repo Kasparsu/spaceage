@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/supercluster@2.2.0/dist/supercluster.min.js"></script>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/leaflet.js"></script>
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <script src="js/supercluster.min.js"></script>
     <script type="text/javascript" src="js/L.simpleGraticule.js"></script>
     <link rel="stylesheet" href="css/L.simpleGraticule.css" />
     <script src="js/leaflet.markercluster.js"></script>
+    <script src="js/simpleheat.js"></script>
+    <script src="js/HeatLayer.js"></script>
     <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
     <style>
         #mapid{
@@ -65,14 +67,21 @@
     // handle drawinf markers
     function draw(obj) {
             var i = 0;
-        var markers = L.markerClusterGroup({
-            disableClusteringAtZoom:6
+//        var markers = L.markerClusterGroup({
+//            disableClusteringAtZoom:6
+//        });
+        var heatpoints = [];
+        console.log(Math.random());
+        obj.forEach(function(el){
+            heatpoints.push([ el['Y'], el['X'], Math.random() ]);
         });
-            obj.forEach(function(el){
-                markers.addLayer(L.marker(L.latLng([ el['Y'], el['X'] ]), {icon: star}).on('dblclick', onDblClick));
-                i++;
-            });
-        map.addLayer(markers);
+        var heat = L.heatLayer(heatpoints, {radius: 10}).addTo(map);
+//            obj.forEach(function(el){
+//
+//                markers.addLayer(L.marker(L.latLng([ el['Y'], el['X'] ]), {icon: star}).on('dblclick', onDblClick));
+//                i++;
+//            });
+//        map.addLayer(markers);
         }
 
     function onDblClick(e){

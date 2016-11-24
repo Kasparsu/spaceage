@@ -14,7 +14,7 @@ class GalaxyController extends Controller
      */
     public function index()
     {
-
+        return view('map');
 
     }
     public function data()
